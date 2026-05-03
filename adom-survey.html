@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Adom African Market — Customer Survey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFF8EE;
+    --bg-card: #FFFFFF;
+    --ink: #1B1410;
+    --ink-soft: #5C4A3D;
+    --accent: #C2410C;        /* burnt orange */
+    --accent-deep: #7C2D12;
+    --gold: #D4A017;
+    --green: #166534;
+    --line: #E8DCC4;
+    --line-soft: #F2E8D5;
+    --shadow: 0 1px 2px rgba(28,20,16,0.04), 0 8px 24px rgba(28,20,16,0.06);
+    --radius: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Manrope', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 10% 0%, rgba(194, 65, 12, 0.06) 0%, transparent 40%),
+      radial-gradient(circle at 90% 100%, rgba(212, 160, 23, 0.08) 0%, transparent 40%);
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 32px 16px 24px;
+  }
+
+  .logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    color: white;
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(194, 65, 12, 0.25);
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(28px, 5vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  h1 .accent {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .time-pill {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 6px 14px;
+    background: var(--line-soft);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent-deep);
+    letter-spacing: 0.02em;
+  }
+
+  /* Section card */
+  .section {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .section-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: white;
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  /* Question */
+  .question {
+    margin-bottom: 24px;
+  }
+
+  .question:last-child { margin-bottom: 0; }
+
+  .question label.q-label {
+    display: block;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .q-helper {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+
+  .required { color: var(--accent); }
+
+  /* Inputs */
+  input[type="text"],
+  input[type="email"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--ink);
+    background: var(--bg);
+    transition: all 0.2s ease;
+  }
+
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%235C4A3D'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 14px;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: var(--accent);
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(194, 65, 12, 0.1);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+    font-family: inherit;
+  }
+
+  /* Radio + Checkbox styled options */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .options.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+  }
+
+  .option {
+    position: relative;
+  }
+
+  .option input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .option label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    background: var(--bg);
+    cursor: pointer;
+    font-size: 14.5px;
+    color: var(--ink);
+    transition: all 0.18s ease;
+    user-select: none;
+  }
+
+  .option label:hover {
+    border-color: var(--gold);
+    background: white;
+  }
+
+  .option input:checked + label {
+    border-color: var(--accent);
+    background: rgba(194, 65, 12, 0.06);
+    color: var(--accent-deep);
+    font-weight: 600;
+  }
+
+  .option .dot {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--line);
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+    transition: all 0.18s ease;
+    background: white;
+  }
+
+  .option input[type="checkbox"] + label .dot {
+    border-radius: 5px;
+  }
+
+  .option input:checked + label .dot {
+    border-color: var(--accent);
+    background: var(--accent);
+  }
+
+  .option input:checked + label .dot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .option input[type="radio"]:checked + label .dot::after {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .option input[type="checkbox"]:checked + label .dot::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3E%3Cpath d='M13.854 3.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 9.793l6.646-6.647a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 12px;
+  }
+
+  /* Rating scale */
+  .rating {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .rating .option label {
+    flex: 1;
+    min-width: 50px;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 14px 10px;
+  }
+
+  .rating .option label .dot { display: none; }
+
+  .rating-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  /* Submit */
+  .submit-area {
+    text-align: center;
+    margin-top: 32px;
+  }
+
+  button[type="submit"] {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 16px 48px;
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 18px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.02em;
+    box-shadow: 0 6px 16px rgba(194, 65, 12, 0.3);
+  }
+
+  button[type="submit"]:hover {
+    background: var(--accent-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(194, 65, 12, 0.35);
+  }
+
+  button[type="submit"]:active {
+    transform: translateY(0);
+  }
+
+  /* Conditional section hidden by default */
+  .conditional { display: none; }
+  .conditional.visible { display: block; }
+
+  /* Footer */
+  .footer-note {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  .footer-note .heart { color: var(--accent); }
+
+  /* Thank you state */
+  .thank-you {
+    display: none;
+    text-align: center;
+    padding: 60px 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .thank-you.visible { display: block; }
+
+  .thank-you h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    color: var(--accent-deep);
+    margin-bottom: 12px;
+  }
+
+  .thank-you p {
+    color: var(--ink-soft);
+    font-size: 16px;
+  }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    .container { padding: 16px 14px 60px; }
+    .section { padding: 22px 18px; }
+    .header { padding: 16px 8px 12px; margin-bottom: 24px; }
+    .options.grid { grid-template-columns: 1fr 1fr; }
+    .rating .option label { font-size: 16px; padding: 12px 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-mark">A</div>
+    <h1>We'd love your <span class="accent">feedback</span></h1>
+    <p class="subtitle">Help us shape Adom African Market and our upcoming website. Your voice matters.</p>
+    <div class="time-pill">⏱ Takes less than 3 minutes</div>
+  </header>
+
+  <form id="surveyForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+    <!-- Section 1 -->
+    <section class="section">
+      <div class="section-header">
+        <span class="section-num">1</span>
+        <h2 class="section-title">A little about you</h2>
+      </div>
+
+      <div class="question">
+        <label class="q-label">What's your age range?</label>
+        <div class="options grid">
+          <div class="option"><input type="radio" id="age1" name="age" value="Under 18"><label for="age1"><span class="dot"></span>Under 18</label></div>
+          <div class="option"><input type="radio" id="age2" name="age" value="18-24"><label for="age2"><span class="dot"></span>18–24</label></div>
+          <div class="option"><input type="radio" id="age3" name="age" value="25-34"><label for="age3"><span class="dot"></span>25–34</label></div>
+          <div class="option"><input type="radio" id="age4" name="age" value="35-44"><label for="age4"><span class="dot"></span>35–44</label></div>
+          <div class="option"><input type="radio" id="age5" name="age" value="45-54"><label for="age5"><span class="dot"></span>45–54</label></div>
+          <div class="option"><input type="radio" id="age6" name="age" value="55+"><label for="age6"><span class="dot"></span>55+</label></div>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="q-label">Which area are you located in?</label>
+        <select name="location">
+          <option value="">Select your area...</option>
+          <option value="Minneapolis">Minneapolis</option>
+          <option value="St. Paul">St. Paul</option>
+          <option value="Brooklyn Park / Brooklyn Center">Brooklyn Park / Brooklyn Center</option>
+          <option value="Bloomington / Richfield">Bloomington / Richfield</option>
+          <option value="Other">Other</option>
+        </select>
+        <input type="text" name="location_other" placeholder="If other, please specify your area..." style="margin-top: 10px;">
+      </div>
+
+      <div class="question">
+        <label class="q-label">How often do you shop at ethnic or cultural grocery stores?</label>
+        <div class="options">
+          <div class="option"><input type="radio" id="freq1" name="shop_frequency" value="Weekly"><label for="freq1"><span class="dot"></span>Weekly</label></div>
+          <div class="option"><input type="radio" id="freq2" name="shop_frequency" value="A few times a month"><label for="freq2"><span class="dot"></span>A few times a month</label></div>
+          <div class="option"><input type="radio" id="freq3" name="shop_frequency" value="Once a month"><label for="freq3"><span class="dot"></span>Once a month</label></div>
+          <div class="option"><input type="radio" id="freq4" name="shop_frequency" value="A few times a year"><label for="freq4"><span class="dot"></span>A few times a year</label></div>
+          <div class="option"><input type="radio" id="freq5" name="shop_frequency" value="Never"><label for="freq5"><span class="dot"></span>Never</label></div>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="q-label">Have you shopped at Adom African Market before?</label>
+        <div class="options">
+          <div class="option"><input type="radio" id="adom1" name="shopped_adom" value="Yes, regularly" data-show="adom-experience"><label for="adom1"><span class="dot"></span>Yes, regularly</label></div>
+          <div class="option"><input type="radio" id="adom2" name="shopped_adom" value="Yes, a few times" data-show="adom-experience"><label for="adom2"><span class="dot"></span>Yes, a few times</label></div>
+          <div class="option"><input type="radio" id="adom3" name="shopped_adom" value="Once" data-show="adom-experience"><label for="adom3"><span class="dot"></span>Once</label></div>
+          <div class="option"><input type="radio" id="adom4" name="shopped_adom" value="No, never"><label for="adom4"><span class="dot"></span>No, never</label></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2 — conditional -->
+    <section class="section conditional" id="adom-experience">
+      <div class="section-header">
+        <span class="section-num">2</span>
+        <h2 class="section-title">Your experience with Adom</h2>
+      </div>
+
+      <div class="question">
+        <label class="q-label">How did you first hear about us?</label>
+        <div class="options">
+          <div class="option"><input type="radio" id="heard1" name="heard_about" value="Word of mouth"><label for="heard1"><span class="dot"></span>Word of mouth (friend or family)</label></div>
+          <div class="option"><input type="radio" id="heard2" name="heard_about" value="Social media"><label for="heard2"><span class="dot"></span>Social media</label></div>
+          <div class="option"><input type="radio" id="heard3" name="heard_about" value="Drove or walked by"><label for="heard3"><span class="dot"></span>Drove or walked by</label></div>
+          <div class="option"><input type="radio" id="heard4" name="heard_about" value="Online search"><label for="heard4"><span class="dot"></span>Online search</label></div>
+          <div class="option"><input type="radio" id="heard5" name="heard_about" value="Other"><label for="heard5"><span class="dot"></span>Other</label></div>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="q-label">What do you usually shop for?</label>
+        <p class="q-helper">Check all that apply</p>
+        <div class="options grid">
+          <div class="option"><input type="checkbox" id="shop1" name="shops_for" value="Fresh produce"><label for="shop1"><span class="dot"></span>Fresh produce</label></div>
+          <div class="option"><input type="checkbox" id="shop2" name="shops_for" value="Meat/seafood"><label for="shop2"><span class="dot"></span>Meat & seafood</label></div>
+          <div class="option"><input type="checkbox" id="shop3" name="shops_for" value="Spices & seasonings"><label for="shop3"><span class="dot"></span>Spices & seasonings</label></div>
+          <div class="option"><input type="checkbox" id="shop4" name="shops_for" value="Packaged/dry goods"><label for="shop4"><span class="dot"></span>Packaged/dry goods</label></div>
+          <div class="option"><input type="checkbox" id="shop5" name="shops_for" value="Beverages"><label for="shop5"><span class="dot"></span>Beverages</label></div>
+          <div class="option"><input type="checkbox" id="shop6" name="shops_for" value="Beauty/personal care"><label for="shop6"><span class="dot"></span>Beauty & personal care</label></div>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="q-label">How would you rate your overall experience?</label>
+        <div class="rating">
+          <div class="option"><input type="radio" id="rate1" name="rating" value="1"><label for="rate1">1</label></div>
+          <div class="option"><input type="radio" id="rate2" name="rating" value="2"><label for="rate2">2</label></div>
+          <div class="option"><input type="radio" id="rate3" name="rating" value="3"><label for="rate3">3</label></div>
+          <div class="option"><input type="radio" id="rate4" name="rating" value="4"><label for="rate4">4</label></div>
+          <div class="option"><input type="radio" id="rate5" name="rating" value="5"><label for="rate5">5</label></div>
+        </div>
+        <div class="rating-labels">
+          <span>Poor</span>
+          <span>Excellent</span>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="q-label">What do you love most about shopping at Adom?</label>
+        <p class="q-helper">Check all that apply</p>
+        <div class="options">
+          <div class="option"><input type="checkbox" id="love1" name="love_most" value="Friendly, welcoming staff"><label for="love1"><span class="dot"></span>Friendly, welcoming staff</label></div>
+          <div class="option"><input type="checkbox" id="love2" name="love_most" value="Sense of community/cultural connection"><label for="love2"><span class="dot"></span>Sense of community/cultural connection</label></div>
+          <div class="option"><input type="checkbox" id="love3" name="love_most" value="Hard-to-find products"><label for="love3"><span class="dot"></span>Hard-to-find products</label></div>
+          <div class="option"><input type="checkbox" id="love4" name="love_most" value="Variety of products"><label for="love4"><span class="dot"></span>Variety of products</label></div>
+          <div class="option"><input type="checkbox" id="love5" name="love_most" value="Pricing"><label for="love5"><span class="dot"></span>Pricing</label></div>
+          <div class="option"><input type="checkbox" id="love6" name="love_most" value="Location"><label for="love6"><span class="dot"></span>Location</label></div>
+          <div class="option"><input type="checkbox" id="love7" name="love_most" value="Other"><label for="love7"><span class="dot"></span>Other</label></div>
+        </div>
+        <input type="text" name="love_most_other" placeholder="If other, please specify..." style="margin-top: 10px;">
+      </div>
+
+      <div class="question">
+        <label class="q-label">Is there a specific item you always look for but can't find elsewhere?</label>
+        <input type="text" name="hard_to_find_item" placeholder="e.g., a specific spice, brand, snack...">
+      </div>
+
+      <div class="question">
+        <label class="q-label">Anything that could be improved?</label>
+        <p class="q-helper">Optional — we welcome honest feedback</p>
+        <textarea name="improvements" placeholder="Share your thoughts..."></textarea>
+      </div>
+    </section>
+
+    <!-- Section 3 -->
+    <section class="section">
+      <div class="section-header">
+        <span class="section-num">3</span>
+        <h2 class="section-title">Shopping habits</h2>
+      </div>
+
+      <div class="question">
+        <label class="q-label">Biggest challenges shopping at ethnic grocery stores?</label>
+        <p class="q-helper">Check all that apply</p>
+        <div class="options">
+          <div class="option"><input type="checkbox" id="ch1" name="challenges" value="Finding specific products"><label for="ch1"><span class="dot"></span>Finding specific products</label></div>
+          <div class="option"><input type="checkbox" id="ch2" name="challenges" value="Knowing if items are in stock"><label for="ch2"><span class="dot"></span>Knowing if items are in stock</label></div>
+          <div class="option"><input type="checkbox" id="ch3" name="challenges" value="Price"><label for="ch3"><span class="dot"></span>Price</label></div>
+          <div class="option"><input type="checkbox" id="ch5" name="challenges" value="Distance/location"><label for="ch5"><span class="dot"></span>Distance or location</label></div>
+          <div class="option"><input type="checkbox" id="ch6" name="challenges" value="Not knowing how to use unfamiliar products"><label for="ch6"><span class="dot"></span>Not knowing how to use unfamiliar products</label></div>
+          <div class="option"><input type="checkbox" id="ch7" name="challenges" value="None of the above"><label for="ch7"><span class="dot"></span>None of the above</label></div>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="q-label">Do you ever shop online for ethnic/cultural groceries?</label>
+        <div class="options">
+          <div class="option"><input type="radio" id="online1" name="shop_online" value="Yes, often"><label for="online1"><span class="dot"></span>Yes, often</label></div>
+          <div class="option"><input type="radio" id="online2" name="shop_online" value="Sometimes"><label for="online2"><span class="dot"></span>Sometimes</label></div>
+          <div class="option"><input type="radio" id="online3" name="shop_online" value="Rarely"><label for="online3"><span class="dot"></span>Rarely</label></div>
+          <div class="option"><input type="radio" id="online4" name="shop_online" value="Never"><label for="online4"><span class="dot"></span>Never</label></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4 -->
+    <section class="section">
+      <div class="section-header">
+        <span class="section-num">4</span>
+        <h2 class="section-title">Cultural grocery stores & websites</h2>
+      </div>
+
+      <div class="question">
+        <label class="q-label">What would make you walk into a cultural/African grocery store?</label>
+        <p class="q-helper">Check all that apply</p>
+        <div class="options">
+          <div class="option"><input type="checkbox" id="walk1" name="walk_in" value="Affordable/cheap prices"><label for="walk1"><span class="dot"></span>Affordable prices</label></div>
+          <div class="option"><input type="checkbox" id="walk2" name="walk_in" value="Fresh meats and produce"><label for="walk2"><span class="dot"></span>Fresh meats and produce</label></div>
+          <div class="option"><input type="checkbox" id="walk3" name="walk_in" value="Authentic cultural clothing"><label for="walk3"><span class="dot"></span>Authentic cultural clothing</label></div>
+          <div class="option"><input type="checkbox" id="walk4" name="walk_in" value="Hard-to-find spices and ingredients"><label for="walk4"><span class="dot"></span>Hard-to-find spices and ingredients</label></div>
+          <div class="option"><input type="checkbox" id="walk6" name="walk_in" value="Beauty and hair care products"><label for="walk6"><span class="dot"></span>Beauty and hair care products</label></div>
+          <div class="option"><input type="checkbox" id="walk10" name="walk_in" value="Recommendations from friends/family"><label for="walk10"><span class="dot"></span>Recommendations from friends/family</label></div>
+          <div class="option"><input type="checkbox" id="walk11" name="walk_in" value="Curiosity to try something new"><label for="walk11"><span class="dot"></span>Curiosity to try something new</label></div>
+          <div class="option"><input type="checkbox" id="walk12" name="walk_in" value="Convenient location"><label for="walk12"><span class="dot"></span>Convenient location</label></div>
+          <div class="option"><input type="checkbox" id="walk13" name="walk_in" value="Other"><label for="walk13"><span class="dot"></span>Other</label></div>
+        </div>
+        <input type="text" name="walk_in_other" placeholder="If other, please specify..." style="margin-top: 10px;">
+      </div>
+
+      <div class="question">
+        <label class="q-label">Would Adom African Market having a website showing all their inventory make things easier for you?</label>
+        <div class="options">
+          <div class="option"><input type="radio" id="int1" name="website_interest" value="Yes, definitely"><label for="int1"><span class="dot"></span>Yes, definitely</label></div>
+          <div class="option"><input type="radio" id="int2" name="website_interest" value="Maybe"><label for="int2"><span class="dot"></span>Maybe</label></div>
+          <div class="option"><input type="radio" id="int3" name="website_interest" value="Not really"><label for="int3"><span class="dot"></span>Not really</label></div>
+          <div class="option"><input type="radio" id="int4" name="website_interest" value="No"><label for="int4"><span class="dot"></span>No</label></div>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="q-label">Which features would be MOST helpful to you?</label>
+        <p class="q-helper">Check all that apply</p>
+        <div class="options">
+          <div class="option"><input type="checkbox" id="f1" name="features_want" value="Browse full product list"><label for="f1"><span class="dot"></span>Browse full product list/inventory</label></div>
+          <div class="option"><input type="checkbox" id="f2" name="features_want" value="Check item availability"><label for="f2"><span class="dot"></span>Check item availability before visiting</label></div>
+          <div class="option"><input type="checkbox" id="f3" name="features_want" value="See prices"><label for="f3"><span class="dot"></span>See prices</label></div>
+          <div class="option"><input type="checkbox" id="f4" name="features_want" value="Online ordering for pickup"><label for="f4"><span class="dot"></span>Online ordering for pickup</label></div>
+          <div class="option"><input type="checkbox" id="f5" name="features_want" value="Online ordering for delivery"><label for="f5"><span class="dot"></span>Online ordering for delivery</label></div>
+          <div class="option"><input type="checkbox" id="f6" name="features_want" value="Recipe ideas"><label for="f6"><span class="dot"></span>Recipe ideas using store products</label></div>
+          <div class="option"><input type="checkbox" id="f7" name="features_want" value="Cultural background on products"><label for="f7"><span class="dot"></span>Cultural background/info on products</label></div>
+          <div class="option"><input type="checkbox" id="f8" name="features_want" value="Weekly deals"><label for="f8"><span class="dot"></span>Weekly deals or promotions</label></div>
+          <div class="option"><input type="checkbox" id="f10" name="features_want" value="Request specific items"><label for="f10"><span class="dot"></span>Contact/request specific items</label></div>
+          <div class="option"><input type="checkbox" id="f11" name="features_want" value="Customer reviews"><label for="f11"><span class="dot"></span>Customer reviews</label></div>
+          <div class="option"><input type="checkbox" id="f12" name="features_want" value="Loyalty program"><label for="f12"><span class="dot"></span>Loyalty/rewards program</label></div>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="q-label">I prefer to pick out my own fresh produce in person.</label>
+        <div class="options">
+          <div class="option"><input type="radio" id="produce1" name="prefer_in_person" value="Yes"><label for="produce1"><span class="dot"></span>Yes</label></div>
+          <div class="option"><input type="radio" id="produce2" name="prefer_in_person" value="No"><label for="produce2"><span class="dot"></span>No</label></div>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="q-label">What might stop you from using the website?</label>
+        <p class="q-helper">Optional</p>
+        <textarea name="barriers" placeholder="Concerns, hesitations, anything..."></textarea>
+      </div>
+    </section>
+
+    <!-- Section 5 -->
+    <section class="section">
+      <div class="section-header">
+        <span class="section-num">5</span>
+        <h2 class="section-title">Final thoughts</h2>
+      </div>
+
+      <div class="question">
+        <label class="q-label">Anything else you'd like to share with us?</label>
+        <p class="q-helper">Optional — we read every response</p>
+        <textarea name="final_thoughts" placeholder="Your thoughts, ideas, requests..."></textarea>
+      </div>
+
+      <div class="question">
+        <label class="q-label">Want updates on Adom news, deals, or the website launch?</label>
+        <p class="q-helper">Optional — drop your email</p>
+        <input type="email" name="email" placeholder="you@example.com">
+      </div>
+    </section>
+
+    <div class="submit-area">
+      <button type="submit">Submit my feedback →</button>
+    </div>
+
+  </form>
+
+  <!-- Thank you -->
+  <div class="thank-you" id="thankYou">
+    <h2>Medaase! 🧡</h2>
+    <p>Thank you for sharing your thoughts with us. Your feedback helps Adom grow.</p>
+  </div>
+
+  <p class="footer-note">Made with <span class="heart">♥</span> for our Adom community</p>
+</div>
+
+<script>
+  // Conditional section reveal
+  const adomRadios = document.querySelectorAll('input[name="shopped_adom"]');
+  const conditionalSection = document.getElementById('adom-experience');
+
+  adomRadios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      if (radio.dataset.show) {
+        conditionalSection.classList.add('visible');
+      } else {
+        conditionalSection.classList.remove('visible');
+      }
+    });
+  });
+
+  // Optional: handle submission feedback if using Formspree's AJAX
+  const form = document.getElementById('surveyForm');
+  form.addEventListener('submit', function(e) {
+    // If you set up Formspree, this gives a nicer experience
+    // Otherwise the default submit behavior runs
+  });
+</script>
+
+</body>
+</html>
